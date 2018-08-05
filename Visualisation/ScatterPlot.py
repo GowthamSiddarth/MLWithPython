@@ -1,0 +1,10 @@
+# Scatterplot Matrix
+from matplotlib import pyplot as plt
+from pandas import read_csv
+from pandas.plotting import scatter_matrix
+
+filename = "../data/pima-indians-diabetes.csv"
+names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
+data = read_csv(filename, names=names)
+scatter_matrix(data)
+plt.show()
