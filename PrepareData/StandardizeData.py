@@ -11,4 +11,5 @@ x, y = values[:, :8], values[:, 8]
 scaler = StandardScaler().fit(x)
 x_rescaled = scaler.transform(x)
 
+set_printoptions(precision=3)
 print(x_rescaled[:20, :])
