@@ -8,9 +8,9 @@ from sklearn.linear_model import LinearRegression
 filename = "../data/housing.csv"
 names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO',
          'B', 'LSTAT', 'MEDV']
-data_frame = read_csv(filename, names=names)
+data_frame = read_csv(filename, delim_whitespace=True, names=names)
 values = data_frame.values
-x, y = values[:, :8], values[:, 8]
+x, y = values[:, :13], values[:, 13]
 
 num_of_folds, seed, scoring = 10, randint(int(time())), 'neg_mean_squared_error'
 k_fold = KFold(n_splits=num_of_folds, random_state=seed)

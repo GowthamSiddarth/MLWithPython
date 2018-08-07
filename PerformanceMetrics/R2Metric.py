@@ -8,7 +8,7 @@ from sklearn.linear_model import LinearRegression
 filename = "../data/housing.csv"
 names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO',
          'B', 'LSTAT', 'MEDV']
-data_frame = read_csv(filename, names=names)
+data_frame = read_csv(filename, delim_whitespace=True, names=names)
 values = data_frame.values
 x, y = values[:, :13], values[:, 13]
 
