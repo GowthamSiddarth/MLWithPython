@@ -17,7 +17,7 @@ X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=test_size, r
 model = LogisticRegression()
 model.fit(X=X_train, y=y_train)
 
-filename = "lr_pima_indians_diabetes.mlmodel"
+filename = "lr_pima_indians_diabetes.pkl"
 dump(model, open(filename, "wb"))
 
 model = load(open(filename, "rb"))
