@@ -90,3 +90,11 @@ axis = fig.add_subplot(111)
 plt.boxplot(algo_results)
 axis.set_xticklabels(algo_names)
 plt.show()
+
+# Standardize Data and Evaluate Algorithms
+pipelines = [('ScaledLR', Pipeline([('Scaler', StandardScaler()), ('LR', LinearRegression())])),
+             ('ScaledLasso', Pipeline([('Scaler', StandardScaler()), ('Lasso', Lasso())])),
+             ('ScaledEN', Pipeline([('Scaler', StandardScaler()), ('LR', ElasticNet())])),
+             ('ScaledSVR', Pipeline([('Scaler', StandardScaler()), ('SVR', SVR())])),
+             ('ScaledCART', Pipeline([('Scaler', StandardScaler()), ('CART', DecisionTreeRegressor())])),
+             ('ScaledkNN', Pipeline([('Scaler', StandardScaler()), ('kNN', KNeighborsRegressor())]))]
