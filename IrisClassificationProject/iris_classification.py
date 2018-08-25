@@ -9,3 +9,8 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
+
+# Load Data
+filename = '../data/iris.data.txt'
+names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
+data_frame = read_csv(filename, names=names)
