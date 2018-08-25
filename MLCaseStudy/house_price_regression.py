@@ -62,3 +62,10 @@ axis.set_xticklabels(attributes_names)
 axis.set_yticklabels(attributes_names)
 
 plt.show()
+
+# Split Dataset
+values, num_of_features = data_frame.values, len(attributes_names)
+X, y = values[:, :num_of_features], values[:, num_of_features]
+validation_size, seed = 0.2, randint(0, int(time()))
+
+X_train, X_validation, y_train, y_validation = train_test_split(X, y, test_size=validation_size, random_state=seed)
