@@ -151,3 +151,17 @@ plt.boxplot(ensemble_results)
 axis.set_xticklabels(ensemble_names)
 plt.show()
 
+# Tune best ensemble
+scaler = StandardScaler().fit(X_train)
+X_train_rescaled = scaler.transform(X_train)
+param_grid = dict(n_estimators=arange(50, 401, 50))
+ensemble = GradientBoostingRegressor(random_state=seed)
+k_fold = KFold(n_splits=num_of_folds, random_state=seed)
+grid = GridSearchCV(ensemble, param_grid=param_grid, scoring=scoring, cv=k_fold)
+grid_result = grid.fit(X_train_rescaled, y_train)
+
+print("Best Score: %f with params: %s" % (grid_result.best_score_, grid_result.best_params_))
+mean_scores, std_scores, params = grid_result.cv_results_['mean_test_score'], grid_result.cv_results_['std_test_score'], \
+                                  grid_result.cv_results_['params']
+for mean_score, std_score, param in zip(mean_scores, std_scores, params):
+    print("Result: %f (mean) %f (std) with %s" % (mean_score, std_score, param))
