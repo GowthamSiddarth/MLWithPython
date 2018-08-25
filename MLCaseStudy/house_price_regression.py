@@ -29,3 +29,8 @@ print(data_frame.dtypes)
 peek_size = 10
 print("Peek size = %d" % peek_size)
 print(data_frame.head(n=peek_size))
+
+print("Data Summary")
+set_option('display.width', 100)
+set_option('precision', 3)
+print(data_frame.describe())
