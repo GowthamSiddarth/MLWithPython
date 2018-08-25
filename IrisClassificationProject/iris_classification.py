@@ -1,4 +1,6 @@
 # Load libraries
+from random import randint
+from time import time
 from pandas import read_csv, set_option
 from pandas.plotting import scatter_matrix
 from matplotlib import pyplot as plt
@@ -48,3 +50,10 @@ data_frame.hist()
 '''Multivariate Plot: Attributes plotted simultaneously'''
 scatter_matrix(data_frame)
 plt.show()
+
+# Split Dataset into training and validation
+validation_size, seed, num_of_features = 0.2, randint(0, int(time())), len(names) - 1
+values = data_frame.values
+X, y = values[:, :num_of_features], values[:, num_of_features]
+X_train, X_validation, y_train, y_validation = train_test_split(X, y, test_size=validation_size, random_state=seed)
+
