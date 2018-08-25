@@ -14,8 +14,11 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor, GradientBoostingRegressor, ExtraTreesRegressor
 from sklearn.pipeline import Pipeline
 
-# Load Dataset
+# Load dataset
 filename = '../data/housing.csv'
 attributes_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO',
                     'B', 'LSTAT', 'MEDV']
-data_frame = read_csv(filename, names=attributes_names)
+data_frame = read_csv(filename, names=attributes_names, delim_whitespace=True)
+
+# Summarize dataset
+print("Shape of dataset: %s" % str(data_frame.shape))
