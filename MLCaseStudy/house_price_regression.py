@@ -1,6 +1,4 @@
 # Load libraries
-from time import time
-from random import randint
 from numpy import arange
 from pandas import read_csv, set_option
 from pandas.plotting import scatter_matrix
@@ -66,7 +64,7 @@ plt.show()
 # Split Dataset
 values, num_of_features = data_frame.values, len(attributes_names) - 1
 X, y = values[:, :num_of_features], values[:, num_of_features]
-validation_size, seed = 0.2, randint(0, int(time()))
+validation_size, seed = 0.2, 7
 
 X_train, X_validation, y_train, y_validation = train_test_split(X, y, test_size=validation_size, random_state=seed)
 
@@ -114,3 +112,15 @@ axis = fig.add_subplot(111)
 plt.boxplot(algo_results)
 axis.set_xticklabels(algo_names)
 plt.show()
+
+# Improve results with Tuning
+scaler = StandardScaler().fit(X_train)
+X_train_rescaled = scaler.transform(X_train)
+k_values = arange(1, 22, 2)
+param_grid = dict(n_neighbors=k_values)
+model = KNeighborsRegressor()
+k_fold = KFold(n_splits=num_of_folds, random_state=seed)
+grid = GridSearchCV(model, param_grid, scoring, cv=k_fold)
+grid.fit(X_train_rescaled, y_train)
+
+print("Best score: %f, Best params: %s" % (grid.best_score_, grid.best_params_))
