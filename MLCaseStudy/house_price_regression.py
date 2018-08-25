@@ -40,3 +40,8 @@ print(data_frame.skew())
 
 print("Correlation of data_frame")
 print(data_frame.corr(method='pearson'))
+
+# Data Visualization
+'''Unimodal Visualization: Visualizing each attribute separately'''
+data_frame.hist(sharex=False, sharey=False, xlabelsize=1, ylabelsize=1)
+plt.show()
