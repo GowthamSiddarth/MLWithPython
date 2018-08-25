@@ -64,8 +64,21 @@ axis.set_yticklabels(attributes_names)
 plt.show()
 
 # Split Dataset
-values, num_of_features = data_frame.values, len(attributes_names)
+values, num_of_features = data_frame.values, len(attributes_names) - 1
 X, y = values[:, :num_of_features], values[:, num_of_features]
 validation_size, seed = 0.2, randint(0, int(time()))
 
 X_train, X_validation, y_train, y_validation = train_test_split(X, y, test_size=validation_size, random_state=seed)
+
+# Evaluation of Algorithms
+num_of_folds, scoring = 10, 'neg_mean_squared_error'
+models = [('LR', LinearRegression()), ('Lasso', Lasso()), ('EN', ElasticNet()), ('SVR', SVR()),
+          ('CART', DecisionTreeRegressor()), ('kNN', KNeighborsRegressor())]
+
+algo_names, algo_results = [], []
+for algo_name, algo in models:
+    k_fold = KFold(n_splits=num_of_folds, random_state=seed)
+    algo_result = cross_val_score(estimator=algo, X=X_train, y=y_train, cv=k_fold, scoring=scoring)
+    algo_results.append(algo_result)
+    algo_names.append(algo_name)
+    print("Algo: %s Result: %f (mean) %f (std)" % (algo_name, algo_result.mean(), algo_result.std()))
