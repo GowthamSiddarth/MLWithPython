@@ -165,3 +165,14 @@ mean_scores, std_scores, params = grid_result.cv_results_['mean_test_score'], gr
                                   grid_result.cv_results_['params']
 for mean_score, std_score, param in zip(mean_scores, std_scores, params):
     print("Result: %f (mean) %f (std) with %s" % (mean_score, std_score, param))
+
+# Prepare model
+scaler = StandardScaler().fit(X_train)
+X_train_rescaled = scaler.transform(X_train)
+model = GradientBoostingRegressor(n_estimators=400, random_state=seed)
+model.fit(X_train_rescaled, y_train)
+
+X_validation_rescaled = scaler.transform(X_validation)
+predictions = model.predict(X_validation_rescaled)
+print("MSE: %f" % mean_squared_error(y_validation, predictions))
+print("R2: %f" % r2_score(y_validation, predictions))
