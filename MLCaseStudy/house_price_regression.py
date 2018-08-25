@@ -1,6 +1,7 @@
 # Load libraries
 from time import time
 from random import randint
+from numpy import arange
 from pandas import read_csv, set_option
 from pandas.plotting import scatter_matrix
 from matplotlib import pyplot as plt
@@ -49,4 +50,15 @@ data_frame.plot(kind='box', subplots=True, layout=(4, 4), sharex=False, sharey=T
 
 '''Multimodal Visualization: Visualizing attributes simultaneously'''
 scatter_matrix(data_frame)
+
+fig = plt.figure()
+axis = fig.add_subplot(111)
+caxis = axis.matshow(data_frame.corr(), vmin=-1, vmax=1, interpolation='none')
+fig.colorbar(caxis)
+ticks = arange(0, 14, 1)
+axis.set_xticks(ticks)
+axis.set_yticks(ticks)
+axis.set_xticklabels(attributes_names)
+axis.set_yticklabels(attributes_names)
+
 plt.show()
