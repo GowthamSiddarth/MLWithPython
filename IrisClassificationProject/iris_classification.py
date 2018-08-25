@@ -59,7 +59,7 @@ X_train, X_validation, y_train, y_validation = train_test_split(X, y, test_size=
 
 # Evaluate Algorithms
 models = [('LR', LogisticRegression()), ('LDA', LinearDiscriminantAnalysis()), ('NB', GaussianNB()),
-          ('CART', DecisionTreeClassifier()), ('SVM', SVC()), ('kNN', DecisionTreeClassifier())]
+          ('CART', DecisionTreeClassifier()), ('SVM', SVC()), ('kNN', KNeighborsClassifier())]
 algo_names, algo_results = [], []
 num_of_folds, scoring = 10, 'accuracy'
 
@@ -74,6 +74,14 @@ for algo_name, algo in models:
 fig = plt.figure()
 fig.suptitle("Algorithms Comparision")
 axis = fig.add_subplot(111)
-axis.set_xticklabels(labels=algo_names)
 plt.boxplot(algo_results)
+axis.set_xticklabels(algo_names)
 plt.show()
+
+# Select Best performing algorithm for validating
+best_model = SVC()
+best_model.fit(X_train, y_train)
+predictions = best_model.predict(X_validation)
+print("Accuracy Score: %s" % accuracy_score(y_true=y_validation, y_pred=predictions))
+print("Confusion Matrix:\n%s" % confusion_matrix(y_true=y_validation, y_pred=predictions))
+print("Classification Report:\n%s" % classification_report(y_true=y_validation, y_pred=predictions))
