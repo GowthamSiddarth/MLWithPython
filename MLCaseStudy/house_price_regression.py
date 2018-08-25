@@ -98,3 +98,9 @@ pipelines = [('ScaledLR', Pipeline([('Scaler', StandardScaler()), ('LR', LinearR
              ('ScaledSVR', Pipeline([('Scaler', StandardScaler()), ('SVR', SVR())])),
              ('ScaledCART', Pipeline([('Scaler', StandardScaler()), ('CART', DecisionTreeRegressor())])),
              ('ScaledkNN', Pipeline([('Scaler', StandardScaler()), ('kNN', KNeighborsRegressor())]))]
+
+algo_names, algo_results = [], []
+for algo_name, algo in pipelines:
+    k_fold = KFold(n_splits=num_of_folds, random_state=seed)
+    algo_result = cross_val_score(estimator=algo, X=X_train, y=y_train, cv=k_fold, scoring=scoring)
+    print("Algo: %s, Result: %f (mean) %f (std)" % (algo_name, algo_result.mean(), algo_result.std()))
