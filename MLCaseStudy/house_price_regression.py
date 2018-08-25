@@ -22,3 +22,6 @@ data_frame = read_csv(filename, names=attributes_names, delim_whitespace=True)
 
 # Summarize dataset
 print("Shape of dataset: %s" % str(data_frame.shape))
+
+print("DataTypes of attributes")
+print(data_frame.dtypes)
