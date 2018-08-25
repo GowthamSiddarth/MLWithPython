@@ -135,4 +135,12 @@ ensembles = [('ScaledAB', Pipeline([('Scaler', StandardScaler()), ('AB', AdaBoos
              ('ScaledGB', Pipeline([('Scaler', StandardScaler()), ('GB', GradientBoostingRegressor())])),
              ('ScaledRF', Pipeline([('Scaler', StandardScaler()), ('RF', RandomForestRegressor())])),
              ('ScaledET', Pipeline([('Scaler', StandardScaler()), ('ET', ExtraTreesRegressor())]))]
+ensemble_names, ensemble_results = [], []
+for ensemble_name, ensemble in ensembles:
+    k_fold = KFold(n_splits=num_of_folds, random_state=seed)
+    ensemble_result = cross_val_score(ensemble, X_train, y_train, scoring=scoring, cv=k_fold)
+    ensemble_names.append(ensemble_name)
+    ensemble_results.append(ensemble_result)
+    print("Result: %f (mean) %f (std), Name: %s" % (ensemble_result.mean(), ensemble_result.std(), ensemble_name))
+
 
