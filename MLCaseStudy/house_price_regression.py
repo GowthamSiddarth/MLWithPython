@@ -82,3 +82,11 @@ for algo_name, algo in models:
     algo_results.append(algo_result)
     algo_names.append(algo_name)
     print("Algo: %s Result: %f (mean) %f (std)" % (algo_name, algo_result.mean(), algo_result.std()))
+
+# COmpare Algorithms
+fig = plt.figure()
+fig.suptitle("Algorithm Comparison")
+axis = fig.add_subplot(111)
+plt.boxplot(algo_results)
+axis.set_xticklabels(algo_names)
+plt.show()
