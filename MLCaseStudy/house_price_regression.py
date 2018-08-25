@@ -25,3 +25,7 @@ print("Shape of dataset: %s" % str(data_frame.shape))
 
 print("DataTypes of attributes")
 print(data_frame.dtypes)
+
+peek_size = 10
+print("Peek size = %d" % peek_size)
+print(data_frame.head(n=peek_size))
