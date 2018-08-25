@@ -38,3 +38,9 @@ print(data_frame.corr(method='pearson'))
 
 print("Skew Summary")
 print(data_frame.skew())
+
+# Visualize Data
+data_frame.plot(kind='box', subplots=True, layout=(2, 2), sharex=False, sharey=False)
+data_frame.hist()
+
+plt.show()
