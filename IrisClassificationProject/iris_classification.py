@@ -15,8 +15,8 @@ from sklearn.neighbors import KNeighborsClassifier
 
 # Load Data
 filename = '../data/iris.data.txt'
-names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
-data_frame = read_csv(filename, names=names)
+attributes_names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
+data_frame = read_csv(filename, names=attributes_names)
 
 # Summarize Data
 print("Data Types of Attributes in DataFrame")
@@ -52,8 +52,20 @@ scatter_matrix(data_frame)
 plt.show()
 
 # Split Dataset into training and validation
-validation_size, seed, num_of_features = 0.2, randint(0, int(time())), len(names) - 1
+validation_size, seed, num_of_features = 0.2, randint(0, int(time())), len(attributes_names) - 1
 values = data_frame.values
 X, y = values[:, :num_of_features], values[:, num_of_features]
 X_train, X_validation, y_train, y_validation = train_test_split(X, y, test_size=validation_size, random_state=seed)
 
+# Evaluate Algorithms
+models = [('LR', LogisticRegression()), ('LDA', LinearDiscriminantAnalysis()), ('NB', GaussianNB()),
+          ('CART', DecisionTreeClassifier()), ('SVM', SVC()), ('kNN', DecisionTreeClassifier())]
+algo_names, algo_results = [], []
+num_of_folds, scoring = 10, 'accuracy'
+
+for algo_name, algo in models:
+    k_fold = KFold(n_splits=num_of_folds, random_state=seed)
+    algo_result = cross_val_score(estimator=algo, X=X_train, y=y_train, cv=k_fold, scoring=scoring)
+    algo_results.append(algo_result)
+    algo_names.append(algo_name)
+    print("Algo: %s Result: %f (mean) %f(std)" % (algo_name, algo_result.mean(), algo_result.std()))
