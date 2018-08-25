@@ -37,3 +37,6 @@ print(data_frame.describe())
 
 print("Skew Summarize Data")
 print(data_frame.skew())
+
+print("Correlation of data_frame")
+print(data_frame.corr(method='pearson'))
