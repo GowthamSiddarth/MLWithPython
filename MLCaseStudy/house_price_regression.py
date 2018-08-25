@@ -46,4 +46,7 @@ print(data_frame.corr(method='pearson'))
 data_frame.hist(sharex=False, sharey=False, xlabelsize=1, ylabelsize=1)
 data_frame.plot(kind='density', subplots=True, layout=(4, 4), sharey=False, legend=True, fontsize=1)
 data_frame.plot(kind='box', subplots=True, layout=(4, 4), sharex=False, sharey=True, fontsize=8)
+
+'''Multimodal Visualization: Visualizing attributes simultaneously'''
+scatter_matrix(data_frame)
 plt.show()
