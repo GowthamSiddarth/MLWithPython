@@ -129,3 +129,10 @@ mean_scores, std_scores, params = grid.cv_results_['mean_test_score'], grid.cv_r
                                   grid.cv_results_['params']
 for mean_score, std_score, param in zip(mean_scores, std_scores, params):
     print("Score: %f (mean), %f (std) Params: %s" % (mean_score, std_score, param))
+
+# Improve Results with Ensemble
+ensembles = [('ScaledAB', Pipeline([('Scaler', StandardScaler()), ('AB', AdaBoostRegressor())])),
+             ('ScaledGB', Pipeline([('Scaler', StandardScaler()), ('GB', GradientBoostingRegressor())])),
+             ('ScaledRF', Pipeline([('Scaler', StandardScaler()), ('RF', RandomForestRegressor())])),
+             ('ScaledET', Pipeline([('Scaler', StandardScaler()), ('ET', ExtraTreesRegressor())]))]
+
