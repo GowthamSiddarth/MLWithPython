@@ -1,5 +1,6 @@
 # Load libraries
 from pandas import read_csv, set_option
+from pandas.plotting import scatter_matrix
 from matplotlib import pyplot as plt
 from sklearn.model_selection import KFold, cross_val_score, train_test_split
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
@@ -40,7 +41,10 @@ print("Skew Summary")
 print(data_frame.skew())
 
 # Visualize Data
+'''Univariate Plot: Each attribute plotted separately'''
 data_frame.plot(kind='box', subplots=True, layout=(2, 2), sharex=False, sharey=False)
 data_frame.hist()
 
+'''Multivariate Plot: Attributes plotted simultaneously'''
+scatter_matrix(data_frame)
 plt.show()
