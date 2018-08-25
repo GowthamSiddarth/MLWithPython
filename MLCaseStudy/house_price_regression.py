@@ -103,4 +103,14 @@ algo_names, algo_results = [], []
 for algo_name, algo in pipelines:
     k_fold = KFold(n_splits=num_of_folds, random_state=seed)
     algo_result = cross_val_score(estimator=algo, X=X_train, y=y_train, cv=k_fold, scoring=scoring)
+    algo_results.append(algo_result)
+    algo_names.append(algo_name)
     print("Algo: %s, Result: %f (mean) %f (std)" % (algo_name, algo_result.mean(), algo_result.std()))
+
+# Compare Algorithms
+fig = plt.figure()
+fig.suptitle("Scaled Algorithms Comparison")
+axis = fig.add_subplot(111)
+plt.boxplot(algo_results)
+axis.set_xticklabels(algo_names)
+plt.show()
