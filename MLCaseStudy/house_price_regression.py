@@ -143,4 +143,11 @@ for ensemble_name, ensemble in ensembles:
     ensemble_results.append(ensemble_result)
     print("Result: %f (mean) %f (std), Name: %s" % (ensemble_result.mean(), ensemble_result.std(), ensemble_name))
 
+# Compare Ensembles
+fig = plt.figure()
+fig.suptitle("Compare Ensembles")
+axis = fig.add_subplot(111)
+plt.boxplot(ensemble_results)
+axis.set_xticklabels(ensemble_names)
+plt.show()
 
