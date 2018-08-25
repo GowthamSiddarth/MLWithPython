@@ -124,3 +124,8 @@ grid = GridSearchCV(model, param_grid, scoring, cv=k_fold)
 grid.fit(X_train_rescaled, y_train)
 
 print("Best score: %f, Best params: %s" % (grid.best_score_, grid.best_params_))
+
+mean_scores, std_scores, params = grid.cv_results_['mean_test_score'], grid.cv_results_['std_test_score'], \
+                                  grid.cv_results_['params']
+for mean_score, std_score, param in zip(mean_scores, std_scores, params):
+    print("Score: %f (mean), %f (std) Params: %s" % (mean_score, std_score, param))
