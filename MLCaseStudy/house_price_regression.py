@@ -44,4 +44,5 @@ print(data_frame.corr(method='pearson'))
 # Data Visualization
 '''Unimodal Visualization: Visualizing each attribute separately'''
 data_frame.hist(sharex=False, sharey=False, xlabelsize=1, ylabelsize=1)
+data_frame.plot(kind='density', subplots=True, layout=(4, 4), sharey=False, legend=True, fontsize=1)
 plt.show()
