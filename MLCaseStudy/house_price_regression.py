@@ -13,3 +13,9 @@ from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor, GradientBoostingRegressor, ExtraTreesRegressor
 from sklearn.pipeline import Pipeline
+
+# Load Dataset
+filename = '../data/housing.csv'
+attributes_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO',
+                    'B', 'LSTAT', 'MEDV']
+data_frame = read_csv(filename, names=attributes_names)
